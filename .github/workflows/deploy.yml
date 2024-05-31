@@ -40,7 +40,7 @@ jobs:
 
     - name: 기존프로세스 종료 
       run: |
-        kill -9 $(ps -ef | grep devops | grep -v grep | head -n 1 | awk '{print $2}')
+        kill -9 $(ps -ef | grep devops | grep -v grep | head -n 1 | awk '{print $2}') || true
 
     - name: Deploy to Server
       run: scp -i ~/.ssh/id_rsa -r build/libs/*.jar ubuntu@3.38.246.161:~/app/
