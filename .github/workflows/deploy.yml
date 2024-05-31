@@ -25,13 +25,22 @@ jobs:
 
     - name: Set SSH key permissions
       run: |
-        mkdir ~/.ssh
+        mkdir -p ~/.ssh
         echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
-        chmod 400 ~/.ssh/id_rsa
-        cat ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+
+    - name: Add SSH key
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
+
+    - name: Add known_hosts
+      run: |
+        echo "3.38.246.161 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOv6VrKy37/jwgpn2LLby5EEg34Af2pSgBQaFoRGIPb7" >> ~/.ssh/known_hosts
 
     - name: Deploy to Server
       run: scp -i ~/.ssh/id_rsa -r build/libs/*.jar ubuntu@3.38.246.161:~/app/
+
 
     - name: Run SSH commands
       run: |
