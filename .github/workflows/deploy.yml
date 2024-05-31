@@ -35,7 +35,7 @@ jobs:
         ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
 
     - name: Deploy to Server
-      run: scp -r -P ${{ secrets.SERVER_PORT }} build/libs/*.jar ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:~/app/
+      run: scp -i ~/.ssh/id_rsa -r -P ${{ secrets.SERVER_PORT }} build/libs/*.jar ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:~/app/
 
     - name: Run SSH commands
       run: |
