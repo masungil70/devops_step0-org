@@ -25,6 +25,7 @@ jobs:
 
     - name: Set SSH key permissions
       run: |
+        mkdir ~/.ssh
         echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
 
