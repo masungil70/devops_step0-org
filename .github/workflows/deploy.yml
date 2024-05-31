@@ -28,14 +28,10 @@ jobs:
         mkdir ~/.ssh
         echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
         chmod 400 ~/.ssh/id_rsa
-
-    - name: Add SSH key
-      uses: webfactory/ssh-agent@v0.5.3
-      with:
-        ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
+        cat ~/.ssh/id_rsa
 
     - name: Deploy to Server
-      run: scp -i ~/.ssh/id_rsa -r -P ${{ secrets.SERVER_PORT }} build/libs/*.jar ubuntu@3.38.246.161:~/app/
+      run: scp -i ~/.ssh/id_rsa -r build/libs/*.jar ubuntu@3.38.246.161:~/app/
 
     - name: Run SSH commands
       run: |
