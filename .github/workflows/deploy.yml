@@ -46,5 +46,5 @@ jobs:
       run: |
         ssh -i ~/.ssh/id_rsa ubuntu@3.38.246.161 << 'EOF'
           pkill -f 'java -jar' || true
-          nohup java -jar ~/app/your-spring-boot-app.jar > log.txt 2>&1 &
+          nohup java -jar ~/app/devops_step0-0.0.1-SNAPSHOT.jar > log.txt 2>&1 &
         EOF
