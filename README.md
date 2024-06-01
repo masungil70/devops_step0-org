@@ -8,6 +8,7 @@
 ### git remote add origin https://github.com/masungil70/devops_step0.git
 ### git push -u origin main
 
+
 # Spring Boot 웹 애플리케이션을 GitHub Actions를 이용하여 Ubuntu 서버에 배포하고 실행하는 방법
 
 1. GitHub Actions 워크플로우 설정
