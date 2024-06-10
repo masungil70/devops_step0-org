@@ -3,13 +3,20 @@
 1. github에 저장소(devops_step0)를 생성한다
 2. 로컬PC에 스프링 부트로 프로젝트(devops_step0)를 생성한다
 3. 로컬PC에서 생성한 프로젝트 폴더로 이동한다
-4. 아래 git 작업 순서
-  1. git init
-  2. git add .
-  3. git commit -m "first commit"
-  4. git branch -M main
-  5. git remote add origin https://github.com/{{계정명}}/devops_step0.git
-  6. git push -u origin main
+4. 만약 위 2. 3.번을 생략하고 나의 저장소 있는 소스를 clone하여 자신의 저장소에 작업을 하려면 다음과 같이한다
+   1. git clone https://github.com/masungil70/devops_step0.git
+   2. cd devops_step0
+   3. .git폴더 삭제한다 
+      1. win의 경우 rm /S /Q .git
+      2. mac 또는 linux 경우  rm -rf .git
+5. 원격저장소의 github persnal access tokens은 반드시 workflow가 선택된 권한이 있어야 한다(없으면 추가할 것)
+6. 로컬 저장소 생성하고 추가한 후 원격저장소를 등록하고 push 한다
+   1. git init
+   2. git add .
+   3. git commit -m "first commit"
+   4. git branch -M main
+   5. git remote add origin https://github.com/{{계정명}}/devops_step0.git
+   6. git push -u origin main
 
 # 빌드와 배포를 수동으로 작업하는 위해서는 ssh를 사용하여 작업을 진행합니다 
   1. ssh로 서버에 연결 할 때 비밀번호를 입력을 하는데 비밀 번호를 입력하지 않고 개인인증키를 사용하여 접근하는 방식을 사용하면 조금 편하게 연결할 수 있음
