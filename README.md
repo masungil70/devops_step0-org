@@ -1,15 +1,35 @@
 # project name : devops_step0
 
-## git 작업 순서 
-### git init
-### git add README.md
-### git commit -m "first commit"
-### git branch -M main
-### git remote add origin https://github.com/masungil70/devops_step0.git
-### git push -u origin main
+1. github에 저장소(devops_step0)를 생성한다
+2. 로컬PC에 스프링 부트로 프로젝트(devops_step0)를 생성한다
+3. 로컬PC에서 생성한 프로젝트 폴더로 이동한다
+4. 아래 git 작업 순서
+  1. git init
+  2. git add .
+  3. git commit -m "first commit"
+  4. git branch -M main
+  5. git remote add origin https://github.com/{{계정명}}/devops_step0.git
+  6. git push -u origin main
 
+# 빌드와 배포를 수동으로 작업하는 위해서는 ssh를 사용하여 작업을 진행합니다 
+  1. ssh로 서버에 연결 할 때 비밀번호를 입력을 하는데 비밀 번호를 입력하지 않고 개인인증키를 사용하여 접근하는 방식을 사용하면 조금 편하게 연결할 수 있음
+  2. ssh 접속을 위한 개인인증키와 공개키를 생성한다 -> [ssh-keygen 사용법 참조](https://handari.tistory.com/8)
+  3. 생성된 공개키를 접속을 하려고 하는 서버에 등록(~/.ssh/autorized_keys 파일에 공개키 추가함)한다
+  4. 로컬PC에 있는 파일을 서버에 secure copy  명령(scp)으로 복사할 있음 (이것이 실제 배포하는 방법임)
+  5. ssh로 접속하여 복사한 파일을 사용하여 실행 하면 배포 작업은 완료이 완료됨
+  6. 실제 작업 순서 (빌드 서버)
+     1. mkdir ~/source-folder (소스 폴더를 생성한다)
+     2. cd ~/source-folder (소스 폴더로 이동한다)
+     3. git init (git 저장소를 생성한다)
+     4. git remote add origin {github 저장소 주소} (원격저장소를 추가하는 명령어입니다)
+     5. git fetch origin (원격 저장소의 최신 변경 사항을 가져오는 명령어입니다)
+     6. git checkout main (원격저장소의 origin/main 브랜치로 체크 아웃하는 명령어입니다)
+     7. ./gradlew build (스프링 프로젝트를 빌드합니다. 최종 결과물은 build/libs/*.jar 파일 생성)
+     8. scp -i ~/.ssh/id_ras build/libs/*.jar {계정}@{배포서버아이피}:/home/{계정}/app (id_ras : ssh 개인키파일명, app 폴더명은 배포서버의 파일이 복사되는 곳의 폴더명, 사전에 폴더가 있어야 됨)
+     9. ssh -i ~/.ssh/id_ras build/libs/*.jar {계정}@{배포서버아이피} (배포서버에 연결함)
+     10. java -jar ~/app/{복사된파일}.jar (배포한 프로그램 실행)
 
-# Spring Boot 웹 애플리케이션을 GitHub Actions를 이용하여 Ubuntu 서버에 배포하고 실행하는 방법
+# 위 수동작업을  GitHub Actions를 이용하여 Ubuntu 서버에 배포하고 실행하는 방법
 
 1. GitHub Actions 워크플로우 설정
 2. Ubuntu 서버 설정
