@@ -100,7 +100,7 @@ jobs:
 위의 deploy.yml 파일은 GitHub Actions를 사용하여 다음 작업을 수행합니다:
 
 
-
+```
 Gradle을 사용하여 빌드
 빌드된 .jar 파일을 서버로 전송
 서버에서 Spring Boot 애플리케이션 실행
@@ -124,7 +124,9 @@ SERVER_HOST: 서버의 IP 주소
 SERVER_USER: 서버의 사용자 이름
 SERVER_SSH_KEY: 로컬 머신에서 생성한 SSH 키 (~/.ssh/id_rsa 파일의 내용)
 SERVER_PORT: SSH 포트 (기본값은 22)
+```
 <hr/>
+
 3. 배포 스크립트 작성
 위의 GitHub Actions 워크플로우에 포함된 배포 스크립트는 서버에 .jar 파일을 업로드하고, 이를 실행하는 작업을 포함합니다. 추가적으로, 필요에 따라 더 복잡한 스크립트를 작성하여 서버 설정 및 애플리케이션 관리를 자동화할 수 있습니다.
 
