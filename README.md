@@ -7,7 +7,7 @@
    1. git clone https://github.com/masungil70/devops_step0.git
    2. cd devops_step0
    3. .git폴더 삭제한다 
-      1. win의 경우 rm /S /Q .git
+      1. win의 경우 rmdir /S /Q .git
       2. mac 또는 linux 경우  rm -rf .git
 5. 원격저장소의 github persnal access tokens은 반드시 workflow가 선택된 권한이 있어야 한다(없으면 추가할 것)
 6. 로컬 저장소 생성하고 추가한 후 원격저장소를 등록하고 push 한다
