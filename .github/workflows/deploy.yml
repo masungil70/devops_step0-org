@@ -14,14 +14,16 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    # JDK 11 설정
+    # JDK 17 설정
     - name: Set up JDK 17
       uses: actions/setup-java@v1
       with:
         java-version: '17'
 
     - name: Build with Gradle
-      run: ./gradlew build
+      run: |
+        chmod +x ./gradlew
+        ./gradlew build
 
     - name: Set SSH key permissions
       run: |
@@ -36,20 +38,20 @@ jobs:
 
     - name: Add known_hosts
       run: |
-        echo "3.38.246.161 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOv6VrKy37/jwgpn2LLby5EEg34Af2pSgBQaFoRGIPb7" >> ~/.ssh/known_hosts
+        ssh-keyscan -t ed25519 43.201.37.175 >> ~/.ssh/known_hosts
 
-    - name: 기존프로세스 종료 
-      run: |
-        kill -9 $(ps -ef | grep devops | grep -v grep | head -n 1 | awk '{print $2}') || true
+    #- name: 기존프로세스 종료 
+    #  run: |
+    #    kill -9 $(ps -ef | grep devops | grep -v grep | head -n 1 | awk '{print $2}') || true
 
     - name: Deploy to Server
-      run: scp -i ~/.ssh/id_rsa -r build/libs/*.jar ubuntu@3.38.246.161:~/app/
+      run: scp build/libs/*.jar ubuntu@43.201.37.175:~/
 
 
     - name: Run SSH commands
       run: |
-        ssh -i ~/.ssh/id_rsa ubuntu@3.38.246.161 << 'EOF'
+        ssh -i ~/.ssh/id_rsa ubuntu@43.201.37.175 << 'EOF'
           pkill -f 'java -jar' || true
-          nohup java -jar ~/app/devops_step0-0.0.1-SNAPSHOT.jar > log.txt 2>&1 &
+          nohup java -jar ~/devops_step0-0.0.1-SNAPSHOT.jar > log.txt &
         EOF
 
