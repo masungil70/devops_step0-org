@@ -45,7 +45,7 @@
 *1. GitHub Actions 워크플로우 설정
 먼저, 프로젝트의 루트 디렉토리에 .github/workflows 디렉토리를 만들고, 여기에 배포 워크플로우 파일을 생성합니다. 예를 들어 deploy.yml 파일을 생성합니다.
 
-<hr/>
+
 
 파일명 : deploy.yml 
 
